@@ -11,8 +11,8 @@
 
 	require('class.inc.php');
 	
+	$setup = new Setup($db);
 	
-	
-	$page = new Page($site,$title);
+	$page = new Page($setup->site,$setup->title);
 	
 ?>
