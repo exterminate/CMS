@@ -26,21 +26,26 @@
 		thing TEXT NOT NULL,
 		description TEXT NOT NULL)');	
 	
+	/**********************/
+	
 	
 	class Setup
 	{
 		public function __construct($db) 
 		{
 			$this->db = $db;
-			$rows = $db->query("SELECT count(metaID) as count FROM meta WHERE metaID='0'");         
+		}	
+		
+		public function first_login() {	
+			$rows = $this->db->query("SELECT count(metaID) as count FROM meta WHERE metaID='0'");         
 			$row = $rows->fetchArray();
 		 	$numRows = $row['count'];
 			if($numRows != 0)
-			{
-				$rows = $db->query("SELECT * FROM meta WHERE metaID='0'");
-				while ($row = $rows->fetchArray()) 
+			{	
+				$result = $this->db->query("SELECT * FROM meta WHERE metaID='0'");
+				while ($row = $result->fetchArray()) 
 				{
-					return $row['thing'];
+					return $row['description'];
 				}
 			}else  
 			{
@@ -53,14 +58,48 @@
 		}	
 	}
 	
+	/**********************/
+	
 	class Page 
 	{
-		public function __construct($site) 
+		public function __construct($site,$db) 
 		{
 			$this->site = $site;
+			$this->db = $db;
 		}	
 		
+		public function page_header()
+		{
+			$rows = $this->db->query("SELECT count(metaID) as count FROM meta WHERE thing='header'");         
+			$row = $rows->fetchArray();
+		 	$numRows = $row['count'];
+			if($numRows != 0)
+			{	
+				$result = $this->db->query("SELECT * FROM meta WHERE thing='header'");
+				while ($row = $result->fetchArray()) 
+				{
+					return $row['description'];
+				}
+			}	
+
+		} 
+		
+		public function page_footer()
+		{
+			
+		}
+		
+		public function page_body()
+		{
+			
+		}
+
+
+
+		
 	}
+	
+	/**********************/
 
 	class User 
 	{
@@ -71,6 +110,8 @@
 		}	
 		
 	}
+	
+	/**********************/
 	
 	class Post
 	{

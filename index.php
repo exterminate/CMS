@@ -13,6 +13,9 @@
 	
 	$setup = new Setup($db);
 	
-	$page = new Page($setup->site,$setup->title);
+	$page = new Page($setup->first_login(),$db);
+	
+	// page header
+	echo $page->page_header();
 	
 ?>
