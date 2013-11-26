@@ -70,6 +70,8 @@
 		
 		public function page_header($site_title,$site_description)
 		{
+			$this->site_title = $site_title;
+			$this->site_description = $site_description;
 			/* Can probably revise this as the use is giving us it in the index.php page 
 			$rows = $this->db->query("SELECT count(metaID) as count FROM meta WHERE thing='header'");         
 			$row = $rows->fetchArray();
