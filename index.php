@@ -16,6 +16,6 @@
 	$page = new Page($setup->first_login(),$db);
 	
 	// page header
-	echo $page->page_header();
+	echo $page->page_header($site_title = "This is my page title",$site_description = "This is my website");
 	
 ?>
