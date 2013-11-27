@@ -2,6 +2,13 @@
 
 	// class.inc.php
 	
+	// Gets
+	
+	if(!isset($_GET['id'])) $_GET['id'] = "";
+	
+	
+	// Classes
+	
 	class MyDB extends SQLite3 
 	{
 		function __construct() {
@@ -72,6 +79,8 @@
 		{
 			$this->site_title = $site_title;
 			$this->site_description = $site_description;
+			
+			echo "<header><h1 class='site-title'>$this->site_title</h1><h2 class='site-tagline'>$this->site_description</h2></header>";
 			/* Can probably revise this as the use is giving us it in the index.php page 
 			$rows = $this->db->query("SELECT count(metaID) as count FROM meta WHERE thing='header'");         
 			$row = $rows->fetchArray();
@@ -92,8 +101,10 @@
 			
 		}
 		
-		public function page_body()
+		public function page_body($id)
 		{
+			$this->id = $id;
+			if(!is_numeric($this->id)) die("<p>Oops! Seems like the page you were looking for does not exist</p>");
 			
 		}
 
@@ -106,11 +117,17 @@
 
 	class User 
 	{
-		public function __construct($name,$time) 
+		public function __construct($name,$password,$time) 
 		{
 			$this->name = $name;
+			$this->password = $password;
 			$this->time = $time;
 		}	
+		
+		public function what_i_just_entered()
+		{
+			printf("you are %n at %p at %t",$this->name,$this->password,$this->time);
+		}
 		
 	}
 	
